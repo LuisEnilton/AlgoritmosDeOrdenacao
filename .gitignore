@@ -7,11 +7,12 @@
 !*.c
 !*.cc
 !*.h
+!*.txt
 # Or directories
 !*/
 !.gitignore
 !README.md
-
+CMakeLists.txt
 *.exe
 *.txt
 cmake-build-debug

@@ -48,18 +48,19 @@ vector<int> lerDeArquivo(const string &nomeArquivo) {
 
 int main() {
     int n;
-    cin >> n;
-    GerarVetores gerarVetores;
-    vector<int> vetorCrescente = gerarVetores.crescente(n);
-    vector<int> vetorAleatorio = gerarVetores.aleatorio(n);
-    vector<int> vetorDecrescente = gerarVetores.decrescente(n);
-    //Escrever os vetores em arquivos
-    string s = "vetorAleatorio" + to_string(n) + "Nums.txt";
-    escreverEmArquivo(s, vetorAleatorio);
-    s = "vetorCrescente" + to_string(n) + "Nums.txt";
-    escreverEmArquivo(s, vetorCrescente);
-    s = "vetorDecrescente" + to_string(n) + "Nums.txt";
-    escreverEmArquivo(s, vetorDecrescente);
+    for(n = 100; n <=500;n+=100){
+        GerarVetores gerarVetores;
+        vector<int> vetorCrescente = gerarVetores.crescente(n);
+        vector<int> vetorAleatorio = gerarVetores.aleatorio(n);
+        vector<int> vetorDecrescente = gerarVetores.decrescente(n);
+        //Escrever os vetores em arquivos
+        string s = "vetorAleatorio" + to_string(n) + "Nums.txt";
+        escreverEmArquivo(s, vetorAleatorio);
+        s = "vetorCrescente" + to_string(n) + "Nums.txt";
+        escreverEmArquivo(s, vetorCrescente);
+        s = "vetorDecrescente" + to_string(n) + "Nums.txt";
+        escreverEmArquivo(s, vetorDecrescente);
+    }
 
     return 0;
 }
