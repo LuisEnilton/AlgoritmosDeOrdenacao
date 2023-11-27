@@ -1,0 +1,18 @@
+# Ignore Everything
+*
+
+# But not .py, .cpp, .c, .cc
+!*.py
+!*.cpp
+!*.c
+!*.cc
+!*.h
+# Or directories
+!*/
+!.gitignore
+!README.md
+
+*.exe
+*.txt
+cmake-build-debug
+.idea
