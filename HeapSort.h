@@ -12,14 +12,22 @@
 #endif //ALGORITMOSDEORDENACAO_HEAPSORT_H
 using namespace std;
 
-class InsertionSort {
+class HeapSort {
 
 private:
 
 public:
 
 
-    void refazHeapMax(int *arr, int index, int tamanho) {
+     HeapSort(vector<int> &arr, int size) {
+            construir_heap(arr, size);
+            for (int i = 0; i < size; i++) {
+                swap((arr[0]), (arr[size - 1 - i]));
+                refazHeapMax(arr, 0, size - 1 - i);
+            }
+    }
+
+    void refazHeapMax(vector<int> &arr, int index, int tamanho) {
         int maior = index;
         int esquerda = 2 * index + 1;
         int direita = 2 * index + 2;
@@ -36,17 +44,11 @@ public:
 
     }
 
-    void construir_heap(int *arr, int size) {
+    void construir_heap(vector<int> &arr, int size) {
         for (int i = size - 1; i >= 0; i--) {
             refazHeapMax(arr, i, size);
         }
     }
 
-    void heapsort(int *arr, int size) {
-        construir_heap(arr, size);
-        for (int i = 0; i < size; i++) {
-            swap((arr[0]), (arr[size - 1 - i]));
-            refazHeapMax(arr, 0, size - 1 - i);
-        }
-    }
+
 };
