@@ -125,7 +125,10 @@ int main() {
                 cout << "Executando Merge Sort..." << endl;
                 inicio = chrono::high_resolution_clock::now();
                 MergeSort(0, arr.size() - 1, arr);
-
+                final = chrono::high_resolution_clock::now();
+                tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
+                cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
+                escreverTempo(n, "MergeSort", tempo);
                 break;
             case 4:
                 cout << "Executando Heap Sort..." << endl;
@@ -147,7 +150,7 @@ int main() {
                 break;
             case 0:
                 cout << "Saindo do programa." << endl;
-                break;
+                break;  
             default:
                 cout << "Escolha inválida. Tente novamente." << endl;
         }

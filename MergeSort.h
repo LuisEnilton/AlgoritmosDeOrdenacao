@@ -69,8 +69,6 @@ public:
 
         if (index_i < index_f) {
 
-            cout << "indice inicial: " << index_i << endl;
-            cout << "indice final: " << index_f << endl;
             int index_m = (index_i + index_f) / 2;
             MergeSort(index_i, index_m, vetor);
             MergeSort(index_m + 1, index_f, vetor);
