@@ -19,7 +19,7 @@ private:
 public:
 
 
-     HeapSort(vector<int> &arr, int size) {
+     HeapSort(vector<int> arr, int size) {
             construir_heap(arr, size);
             for (int i = 0; i < size; i++) {
                 swap((arr[0]), (arr[size - 1 - i]));

@@ -16,7 +16,7 @@ private:
 
 public:
 
-        InsertionSort(int tamanho, vector<int> &vetor) {
+        InsertionSort(int tamanho, vector<int> vetor) {
 
         for (int i = 1; i < tamanho; i++) { // come�a em 1, pois compara o vetor[i] com o anterior (vetor[j])
             int item = vetor[i];

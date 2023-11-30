@@ -3,12 +3,14 @@
 //
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include <vector>
 #include <string>
 #include <algorithm>
 #include "GerarVetores.h"
 
 using namespace std;
+namespace fs = std::filesystem;
 
 // Função para escrever os elementos de um vetor em um arquivo de texto
 void escreverEmArquivo(const string &nomeArquivo, const vector<int> &meuVetor) {
@@ -49,16 +51,21 @@ vector<int> lerDeArquivo(const string &nomeArquivo) {
 int main() {
     int n;
     for(n = 100; n <=500;n+=100){
+        string diretorio = "vetores" + to_string(n);
+        if (!fs::exists(diretorio)) {
+            fs::create_directory(diretorio);
+        }
+
         GerarVetores gerarVetores;
         vector<int> vetorCrescente = gerarVetores.crescente(n);
         vector<int> vetorAleatorio = gerarVetores.aleatorio(n);
         vector<int> vetorDecrescente = gerarVetores.decrescente(n);
         //Escrever os vetores em arquivos
-        string s = "vetorAleatorio" + to_string(n) + "Nums.txt";
+        string s = diretorio + "/vetorAleatorio" + to_string(n) + "Nums.txt";
         escreverEmArquivo(s, vetorAleatorio);
-        s = "vetorCrescente" + to_string(n) + "Nums.txt";
+        s = diretorio + "/vetorCrescente" + to_string(n) + "Nums.txt";
         escreverEmArquivo(s, vetorCrescente);
-        s = "vetorDecrescente" + to_string(n) + "Nums.txt";
+        s = diretorio + "/vetorDecrescente" + to_string(n) + "Nums.txt";
         escreverEmArquivo(s, vetorDecrescente);
     }
 

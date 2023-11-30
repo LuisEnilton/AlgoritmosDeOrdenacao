@@ -18,7 +18,7 @@ private:
 
 public:
 
-    void Merge(int index_i, int index_m, int index_f, vector<int> &vetor) {
+    void Merge(int index_i, int index_m, int index_f, vector<int> vetor) {
         int tamanho_esq = index_m - index_i + 1;
         int tamanho_dir = index_f - index_m;
 

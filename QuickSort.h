@@ -18,7 +18,7 @@ class QuickSort {
 
     public:
 
-    int ParticaoLomutos(int index_i, int index_f, vector<int> &vetor){
+    int ParticaoLomutos(int index_i, int index_f, vector<int> vetor){
 
         int index_pivot = index_f;
         int i  = index_i - 1;

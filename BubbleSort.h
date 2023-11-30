@@ -16,7 +16,7 @@ private:
 
 public:
 
-     BubbleSort(int tamanho, vector<int> &vetor){
+     BubbleSort(int tamanho, vector<int> vetor){
         for(int i=0; i < tamanho - 1; i++){ // tamanho - 1 em virtude do vetor ser 0 indexado
             for(int j=0; j < tamanho - 1 - i; j++){ // realiza 1 itera��o a menos a cada incremento de i
                 if(vetor[j] > vetor[j+1]){

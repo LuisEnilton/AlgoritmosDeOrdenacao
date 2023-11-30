@@ -63,20 +63,22 @@ int main() {
 
     vector<int> arr;
     string s;
+    string diretorio = "vetores" + to_string(n);
     cout << endl;
     switch (choice) {
         case 1:
             cout << "Lendo vetor aleatorio..." << endl;
-            s = "vetorAleatorio" + to_string(n) + "Nums.txt";
+            s = diretorio + "/vetorAleatorio" + to_string(n) + "Nums.txt";
             arr = lerDoArquivo(s);
             break;
         case 2:
             cout << "Lendo vetor crescente..." << endl;
-            s = "vetorCrescente" + to_string(n) + "Nums.txt";
+            s = diretorio + "vetorCrescente" + to_string(n) + "Nums.txt";
             arr = lerDoArquivo(s);
             break;
         case 3:
             cout << "Lendo vetor decrescente..." << endl;
+            s = diretorio + "vetorDecrescente" + to_string(n) + "Nums.txt";
             arr = lerDoArquivo(s);
             break;
         default:
