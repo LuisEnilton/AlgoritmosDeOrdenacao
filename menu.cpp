@@ -13,6 +13,7 @@
 #include "HeapSort.h"
 #include "QuickSort.h"
 #include <chrono>
+#define endl '\n'
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -62,7 +63,7 @@ vector<int> lerDoArquivo(const string &nomeArquivo) {
 int main() {
     int choice;
     //n é escolhido arbitrariamente
-    int n = 100;
+    int n = 200000;
 
     cout << "Escolha o tipo de vetor que deseja ordenar:" << endl;
     cout << "1. Vetor aleatorio" << endl;
