@@ -50,7 +50,7 @@ vector<int> lerDeArquivo(const string &nomeArquivo) {
 
 int main() {
     int n;
-    for(n = 100; n <=500;n+=100){
+    for(n = 50000; n <=200000;n+=50000){
         string diretorio = "vetores" + to_string(n);
         if (!fs::exists(diretorio)) {
             fs::create_directory(diretorio);

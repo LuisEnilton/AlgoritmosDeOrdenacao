@@ -14,9 +14,11 @@
 #include <chrono>
 using namespace std;
 
+vector<string> cond = {"Aleatorio", "Crescente", "Descrescente"};
+
 // s é o nome do algoritmo de ordenação e n é o tamanho do vetor
-void escreverTempo(int n,const string& s, long long tempo){
-    string name = s + to_string(n) + "Nums.txt";
+void escreverTempo(int n,const string& s, long long tempo, int choice){
+    string name = s + cond[choice] + to_string(n) + "Nums.txt";
     ofstream arquivo(name, ios::app);
     if (arquivo.is_open()) {
         arquivo << tempo << "\n";
@@ -52,7 +54,7 @@ vector<int> lerDoArquivo(const string &nomeArquivo) {
 int main() {
     int choice;
     //n é escolhido arbitrariamente
-    int n = 100;
+    int n = 200000;
 
     cout << "Escolha o tipo de vetor que deseja ordenar:" << endl;
     cout << "1. Vetor aleatorio" << endl;
@@ -73,17 +75,19 @@ int main() {
             break;
         case 2:
             cout << "Lendo vetor crescente..." << endl;
-            s = diretorio + "vetorCrescente" + to_string(n) + "Nums.txt";
+            s = diretorio + "/vetorCrescente" + to_string(n) + "Nums.txt";
             arr = lerDoArquivo(s);
             break;
         case 3:
             cout << "Lendo vetor decrescente..." << endl;
-            s = diretorio + "vetorDecrescente" + to_string(n) + "Nums.txt";
+            s = diretorio + "/vetorDecrescente" + to_string(n) + "Nums.txt";
             arr = lerDoArquivo(s);
             break;
         default:
             cout << "Escolha inválida. Tente novamente." << endl;
     }
+
+    int ordem = choice;
 
     cout << "Vetor lido com Sucesso: ";
     cout << endl;
@@ -112,7 +116,7 @@ int main() {
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
                 cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "BubbleSort", tempo);
+                escreverTempo(n, "BubbleSort", tempo, ordem-1);
                 break;
             case 2:
                 cout << "Executando Insertion Sort..." << endl;
@@ -121,7 +125,7 @@ int main() {
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
                 cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "InsertionSort", tempo);
+                escreverTempo(n, "InsertionSort", tempo, ordem-1);
                 break;
             case 3:
                 cout << "Executando Merge Sort..." << endl;
@@ -130,7 +134,7 @@ int main() {
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
                 cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "MergeSort", tempo);
+                escreverTempo(n, "MergeSort", tempo, ordem-1);
                 break;
             case 4:
                 cout << "Executando Heap Sort..." << endl;
@@ -139,7 +143,7 @@ int main() {
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
                 cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "HeapSort", tempo);
+                escreverTempo(n, "HeapSort", tempo, ordem-1);
                 break;
             case 5:
                 cout << "Executando Quick Sort..." << endl;
@@ -148,7 +152,7 @@ int main() {
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
                 cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "QuickSort", tempo);
+                escreverTempo(n, "QuickSort", tempo, ordem-1);
                 break;
             case 0:
                 cout << "Saindo do programa." << endl;
