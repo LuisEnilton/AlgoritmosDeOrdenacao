@@ -18,7 +18,7 @@ private:
 
 public:
 
-    void Merge(int index_i, int index_m, int index_f, vector<int> vetor) {
+    void Merge(int index_i, int index_m, int index_f, vector<int> &vetor) {
         int tamanho_esq = index_m - index_i + 1;
         int tamanho_dir = index_f - index_m;
 
@@ -65,7 +65,7 @@ public:
     }
 
     // algoritmo MergeSort utilizando Divisao e Conquista
-    MergeSort(int index_i, int index_f, vector<int> &vetor) {
+    MergeSort(int index_i, int index_f, vector<int> vetor) {
 
         if (index_i < index_f) {
 

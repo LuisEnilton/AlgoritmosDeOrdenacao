@@ -18,7 +18,7 @@ class QuickSort {
 
     public:
 
-    int ParticaoLomutos(int index_i, int index_f, vector<int> vetor){
+    int ParticaoLomutos(int index_i, int index_f, vector<int> &vetor){
 
         int index_pivot = index_f;
         int i  = index_i - 1;
@@ -37,7 +37,7 @@ class QuickSort {
         return i+1;
     }
 
-     QuickSort(int index_i, int index_f, vector<int> &vetor){
+     QuickSort(int index_i, int index_f, vector<int> vetor){
 
         if(index_i < index_f){
             int index_pivot = ParticaoLomutos(index_i, index_f, vetor); // pivot j� ordenado!
