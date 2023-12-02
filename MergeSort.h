@@ -17,12 +17,13 @@ class MergeSort {
 private:
 
 public:
+    long long qtd_comp = 0;// quantidade de comparacoes realizadas pelo algoritmo
 
     void Merge(int index_i, int index_m, int index_f, vector<int> &vetor) {
         int tamanho_esq = index_m - index_i + 1;
         int tamanho_dir = index_f - index_m;
 
-        // Cria vetores tempor�rios para os vetores retornados pelos filhos da esquerda e da direita
+        // Cria vetores temporarios para os vetores retornados pelos filhos da esquerda e da direita
         //respectivamente
         vector<int> vetor_esq(tamanho_esq);
         vector<int> vetor_dir(tamanho_dir);
@@ -38,6 +39,7 @@ public:
 
         // Percorre os valores dos vetores da esquerda e da direita e os ordena de volta no vetor original
         while (i < tamanho_esq && j < tamanho_dir) {
+            qtd_comp++;
             if (vetor_esq[i] <= vetor_dir[j]) {
                 vetor[k] = vetor_esq[i];
                 i++;
@@ -48,14 +50,14 @@ public:
             k++;
         }
 
-        // Se o vetor da esquerda for maior que o da direita, os valores restantes s�o ordenados
+        // Se o vetor da esquerda for maior que o da direita, os valores restantes sao ordenados
         while (i < tamanho_esq) {
             vetor[k] = vetor_esq[i];
             i++;
             k++;
         }
 
-        // Se o vetor da direita for maior que o da direita, os valores restantes s�o ordenados
+        // Se o vetor da direita for maior que o da direita, os valores restantes sa ordenados
         while (j < tamanho_dir) {
             vetor[k] = vetor_dir[j];
             j++;
@@ -65,14 +67,15 @@ public:
     }
 
     // algoritmo MergeSort utilizando Divisao e Conquista
-    MergeSort(int index_i, int index_f, vector<int> vetor) {
+    MergeSort(int index_i, int index_f, vector<int> &vetor, long long &qtd) {
 
         if (index_i < index_f) {
 
             int index_m = (index_i + index_f) / 2;
-            MergeSort(index_i, index_m, vetor);
-            MergeSort(index_m + 1, index_f, vetor);
+            MergeSort(index_i, index_m, vetor,qtd);
+            MergeSort(index_m + 1, index_f, vetor,qtd);
             Merge(index_i, index_m, index_f, vetor);
         }
+        qtd = qtd_comp;
     }
 };

@@ -48,9 +48,11 @@ vector<int> lerDeArquivo(const string &nomeArquivo) {
     return meuVetor;
 }
 
+
 int main() {
-    int n;
-    for(n = 50000; n <=200000;n+=50000){
+
+    vector<int> comprimentos = {100, 1000, 5000, 30000, 50000, 100000, 150000, 200000};
+    for (int n: comprimentos) {
         string diretorio = "vetores" + to_string(n);
         if (!fs::exists(diretorio)) {
             fs::create_directory(diretorio);

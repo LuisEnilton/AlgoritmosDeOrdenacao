@@ -12,16 +12,17 @@
 #include "HeapSort.h"
 #include "QuickSort.h"
 #include <chrono>
+
 using namespace std;
 
 vector<string> cond = {"Aleatorio", "Crescente", "Descrescente"};
 
 // s é o nome do algoritmo de ordenação e n é o tamanho do vetor
-void escreverTempo(int n,const string& s, long long tempo, int choice){
+void escreverTempo(int n, const string &s, long long tempo, long long qtd, int choice) {
     string name = s + cond[choice] + to_string(n) + "Nums.txt";
     ofstream arquivo(name, ios::app);
     if (arquivo.is_open()) {
-        arquivo << tempo << "\n";
+        arquivo << tempo << " " << qtd << "\n";
         arquivo.close();
         cout << "Tempo escrito com sucesso no arquivo " << name << endl;
     } else {
@@ -51,10 +52,11 @@ vector<int> lerDoArquivo(const string &nomeArquivo) {
 }
 
 
+
 int main() {
     int choice;
     //n é escolhido arbitrariamente
-    int n = 200000;
+    int n = 100;
 
     cout << "Escolha o tipo de vetor que deseja ordenar:" << endl;
     cout << "1. Vetor aleatorio" << endl;
@@ -91,7 +93,7 @@ int main() {
 
     cout << "Vetor lido com Sucesso: ";
     cout << endl;
-
+    vector<int> aux = arr;
     do {
         cout << "Escolha um metodo de ordenacao:" << endl;
         cout << "1. Bubble Sort" << endl;
@@ -105,61 +107,68 @@ int main() {
         cin >> choice;
         auto inicio = chrono::high_resolution_clock::now();
         auto final = chrono::high_resolution_clock::now();
-
+        arr = aux;
         long long tempo;
-
+        long long qtd = 0;
         switch (choice) {
+
             case 1:
                 cout << "Executando Bubble Sort..." << endl;
                 inicio = chrono::high_resolution_clock::now();
-                BubbleSort(arr.size(), arr);
+                BubbleSort(arr.size(), arr, qtd);
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
-                cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "BubbleSort", tempo, ordem-1);
+                cout << "Tempo de execucao: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count()
+                     << " nanosegundos" << endl;
+                escreverTempo(n, "BubbleSort", tempo, qtd, ordem - 1);
                 break;
             case 2:
                 cout << "Executando Insertion Sort..." << endl;
                 inicio = chrono::high_resolution_clock::now();
-                InsertionSort(arr.size(), arr);
+                InsertionSort(arr.size(), arr, qtd);
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
-                cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "InsertionSort", tempo, ordem-1);
+                cout << "Tempo de execucao: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count()
+                     << " nanosegundos" << endl;
+                escreverTempo(n, "InsertionSort", tempo, qtd, ordem - 1);
                 break;
             case 3:
                 cout << "Executando Merge Sort..." << endl;
                 inicio = chrono::high_resolution_clock::now();
-                MergeSort(0, arr.size() - 1, arr);
+                MergeSort(0, arr.size() - 1, arr, qtd);
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
-                cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "MergeSort", tempo, ordem-1);
+                cout << "Tempo de execucao: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count()
+                     << " nanosegundos" << endl;
+                escreverTempo(n, "MergeSort", tempo, qtd, ordem - 1);
                 break;
             case 4:
                 cout << "Executando Heap Sort..." << endl;
                 inicio = chrono::high_resolution_clock::now();
-                HeapSort(arr, arr.size());
+                HeapSort(arr, arr.size(),qtd);
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
-                cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "HeapSort", tempo, ordem-1);
+                cout << "Tempo de execucao: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count()
+                     << " nanosegundos" << endl;
+                escreverTempo(n, "HeapSort", tempo, qtd, ordem - 1);
                 break;
             case 5:
                 cout << "Executando Quick Sort..." << endl;
                 inicio = chrono::high_resolution_clock::now();
-                QuickSort(0, arr.size() - 1, arr);
+                QuickSort(0, arr.size() - 1, arr, qtd);
                 final = chrono::high_resolution_clock::now();
                 tempo = chrono::duration_cast<chrono::nanoseconds>(final - inicio).count();
-                cout << "Tempo de execução: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count() << " nanosegundos" << endl;
-                escreverTempo(n, "QuickSort", tempo, ordem-1);
+                cout << "Tempo de execucao: " << chrono::duration_cast<chrono::nanoseconds>(final - inicio).count()
+                     << " nanosegundos" << endl;
+                escreverTempo(n, "QuickSort", tempo, qtd, ordem - 1);
                 break;
             case 0:
                 cout << "Saindo do programa." << endl;
-                break;  
+                break;
             default:
                 cout << "Escolha inválida. Tente novamente." << endl;
+
         }
-    cout << endl;
+        cout << endl;
     } while (choice != 0);
 }

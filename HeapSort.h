@@ -17,20 +17,23 @@ class HeapSort {
 private:
 
 public:
+    long long qtd_comp = 0;// quantidade de comparacoes realizadas pelo algoritmo
 
-
-     HeapSort(vector<int> arr, int size) {
-            construir_heap(arr, size);
-            for (int i = 0; i < size; i++) {
-                swap((arr[0]), (arr[size - 1 - i]));
-                refazHeapMax(arr, 0, size - 1 - i);
-            }
+    HeapSort(vector<int> &arr, int size, long long &qtd) {
+        construir_heap(arr, size);
+        for (int i = 0; i < size; i++) {
+            swap((arr[0]), (arr[size - 1 - i]));
+            refazHeapMax(arr, 0, size - 1 - i);
+        }
+        qtd = qtd_comp;
     }
 
     void refazHeapMax(vector<int> &arr, int index, int tamanho) {
         int maior = index;
         int esquerda = 2 * index + 1;
         int direita = 2 * index + 2;
+
+        qtd_comp += 3;
         if (esquerda < tamanho && arr[esquerda] > arr[maior]) {
             maior = esquerda;
         }
