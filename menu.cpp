@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <random>
 #include <fstream>
+#include <filesystem>
 #include "BubbleSort.h"
 #include "InsertionSort.h"
 #include "MergeSort.h"
@@ -14,12 +15,17 @@
 #include <chrono>
 
 using namespace std;
+namespace fs = std::filesystem;
 
 vector<string> cond = {"Aleatorio", "Crescente", "Descrescente"};
 
 // s é o nome do algoritmo de ordenação e n é o tamanho do vetor
 void escreverTempo(int n, const string &s, long long tempo, long long qtd, int choice) {
-    string name = s + cond[choice] + to_string(n) + "Nums.txt";
+    string diretorio = "resultadosVetores" + to_string(n);
+        if (!fs::exists(diretorio)) {
+            fs::create_directory(diretorio);
+        }
+    string name = diretorio + '/' + s + cond[choice] + to_string(n) + "Nums.txt";
     ofstream arquivo(name, ios::app);
     if (arquivo.is_open()) {
         arquivo << tempo << " " << qtd << "\n";
