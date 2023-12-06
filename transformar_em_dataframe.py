@@ -56,7 +56,7 @@ def gerar_matriz(diretorios):
             elif arquivo.find("HeapSort") != -1:
                 algoritmo = "HeapSort"
 
-            print("Arquivo: "+arquivo+" - Algoritmo: "+algoritmo)
+            # print("Arquivo: "+arquivo+" - Algoritmo: "+algoritmo)
 
             # nomeia o tipo de ordenação do vetor de entrada com base, também, no nome do arquivo
             ordenacao_vetor_entrada = ""
@@ -85,12 +85,6 @@ def gerar_df(nomes_diretorios):
     columns = ["Algoritmo", "Tamanho da entrada", "Ordenação da entrada", "Media dos tempos", "Media das comparações"]
     df = pd.DataFrame(data = matriz_resultante, columns = columns)
 
-    print(df)
+    # print(df)
 
     return df
-
-
-nomes_diretorios = ["resultadosVetores100", "resultadosVetores1000", "resultadosVetores5000",
-                        "resultadosVetores30000", "resultadosVetores50000","resultadosVetores100000",
-                        "resultadosVetores150000", "resultadosVetores200000"]
-gerar_df(nomes_diretorios)
