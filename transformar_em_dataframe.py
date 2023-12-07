@@ -30,6 +30,7 @@ def gerar_matriz(diretorios):
         inteiros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
         arquivos = os.listdir(diretorio)
+        arquivos = sorted(arquivos)
 
         tamanho_entrada = 0
 
@@ -69,7 +70,7 @@ def gerar_matriz(diretorios):
 
             # termina de registrar os dados de uma medição
             medias_valores = media_arquivo(str(diretorio) + '/' + str(arquivo))
-            media_tempos = medias_valores[0]
+            media_tempos = medias_valores[0]/100000
             media_qtds = medias_valores[1]
 
             # registra os dados na matriz
@@ -85,10 +86,6 @@ def gerar_df(nomes_diretorios):
     columns = ["Algoritmo", "Tamanho da entrada", "Ordenação da entrada", "Media dos tempos", "Media das comparações"]
     df = pd.DataFrame(data = matriz_resultante, columns = columns)
 
-    media_em_mili = []
-    for indice, linha in df.iterrows():
-            media_em_mili.append(linha["Media dos tempos"]/1000000) # 10**-9 para 10**-3
-    
-    df["Media dos tempos"] = media_em_mili
+    # print(df)
 
     return df

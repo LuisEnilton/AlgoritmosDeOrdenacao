@@ -16,6 +16,75 @@ def salvar_grafico(diretorio, arquivo, imagem):
     if not os.path.exists(diretorio):
         os.makedirs(diretorio)
     plt.savefig(diretorio+"/"+arquivo)
+
+def tempos_nlogn_ins(df, tamanhos):
+    for tamanho in tamanhos:
+        df_entrada = df.loc[df["Tamanho da entrada"] == tamanho]
+        tempos = {}
+
+        for indice, linha in df_entrada.iterrows():
+            if linha["Ordenação da entrada"] == "Crescente":
+                algoritmo = linha["Algoritmo"]
+                if algoritmo not in ["BubbleSort"]:
+                    tempos[algoritmo] = int(linha["Media dos tempos"])
+
+        plt.figure()
+        ax = sns.barplot(tempos, palette="Set2")
+        plt.title("Vetor Crescente: Algoritmo x Tempo de execução\n para entradas de tamanho "+str(tamanho))
+        for p in ax.patches:
+            valor = p.get_height()/1000000
+            ax.annotate(f'{valor:.1f}', (p.get_x() + p.get_width() / 2., valor),
+                ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+        plt.ylabel('Tempo em milissegundos')
+        diretorio = "algoritmoXTempoDeExecucaoPorTamanhoDaEntrada"
+        arquivo = "AlgoritmosCRESCENTEnlognXTempoDeExecucaoParaEntradasDeTamanho"+str(tamanho)
+        salvar_grafico(diretorio, arquivo, plt)
+
+def tempo_nlogn_decres(df, tamanhos):
+    for tamanho in tamanhos:
+        df_entrada = df.loc[df["Tamanho da entrada"] == tamanho]
+        tempos = {}
+
+        for indice, linha in df_entrada.iterrows():
+            if linha["Ordenação da entrada"] == "Decrescente":
+                algoritmo = linha["Algoritmo"]
+                if algoritmo not in ["BubbleSort", "InsertionSort"]:
+                    tempos[algoritmo] = int(linha["Media dos tempos"])
+
+        plt.figure()
+        ax = sns.barplot(tempos, palette="Set2")
+        plt.title("Vetor Decrescente: Algoritmo x Tempo de execução\n para entradas de tamanho "+str(tamanho))
+        for p in ax.patches:
+            valor = p.get_height()/1000000
+            ax.annotate(f'{valor:.1f}', (p.get_x() + p.get_width() / 2., valor),
+                ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+        plt.ylabel('Tempo em milissegundos')
+        diretorio = "algoritmoXTempoDeExecucaoPorTamanhoDaEntrada"
+        arquivo = "AlgoritmoDECRESCENTEnlognXTempoDeExecucaoParaEntradasDeTamanho"+str(tamanho)
+        salvar_grafico(diretorio, arquivo, plt)
+
+def tempo_nlogn(df, tamanhos):
+    for tamanho in tamanhos:
+        df_entrada = df.loc[df["Tamanho da entrada"] == tamanho]
+        tempos = {}
+
+        for indice, linha in df_entrada.iterrows():
+            if linha["Ordenação da entrada"] == "Aleatorio":
+                algoritmo = linha["Algoritmo"]
+                if algoritmo not in ["BubbleSort", "InsertionSort"]:
+                    tempos[algoritmo] = int(linha["Media dos tempos"])
+
+        plt.figure()
+        ax = sns.barplot(tempos, palette="Set2")
+        plt.title("Vetor Aleatório: Algoritmo x Tempo de execução\n para entradas de tamanho "+str(tamanho))
+        for p in ax.patches:
+            valor = p.get_height()/1000000
+            ax.annotate(f'{valor:.1f}', (p.get_x() + p.get_width() / 2., valor),
+                ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+        plt.ylabel('Tempo em milissegundos')
+        diretorio = "algoritmoXTempoDeExecucaoPorTamanhoDaEntrada"
+        arquivo = "AlgoritmoALEATORIOnlognXTempoDeExecucaoParaEntradasDeTamanho"+str(tamanho)
+        salvar_grafico(diretorio, arquivo, plt)
         
 
 def tempo_e_algoritmo_por_tamanho_da_entrada(df, tamanhos):
@@ -27,14 +96,14 @@ def tempo_e_algoritmo_por_tamanho_da_entrada(df, tamanhos):
             if linha["Ordenação da entrada"] == "Aleatorio":
                 tempos[linha["Algoritmo"]] = int(linha["Media dos tempos"])
 
-        print(tamanho)
-        for key, item in tempos.items():
-            print(str(key)+" : "+str(item))
-
-
         plt.figure()
-        sns.barplot(tempos, palette="Set2")
+        ax = sns.barplot(tempos, palette="Set2")
         plt.title("Algoritmo x Tempo de execução para entradas de tamanho "+str(tamanho))
+        for p in ax.patches:
+            valor = p.get_height()/1000000
+            ax.annotate(f'{valor:.1f}', (p.get_x() + p.get_width() / 2., valor),
+                ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+        plt.ylabel('Tempo em milissegundos')
 
         diretorio = "algoritmoXTempoDeExecucaoPorTamanhoDaEntrada"
         arquivo = "AlgoritmoXTempoDeExecucaoParaEntradasDeTamanho"+str(tamanho)
@@ -44,20 +113,21 @@ def tempo_e_algoritmo_por_tamanho_da_entrada(df, tamanhos):
 def qtd_de_comparacoes_e_algoritmo_por_tamanho_de_entrada(df, tamanhos):
     for tamanho in tamanhos:
         df_entrada = df.loc[df["Tamanho da entrada"] == tamanho]
+        print(df_entrada)
         qtds = {}
 
         for indice, linha in df_entrada.iterrows():
             if linha["Ordenação da entrada"] == "Aleatorio":
                 qtds[linha["Algoritmo"]] = int(linha["Media das comparações"])
 
-        print(tamanho)
-        for key, item in qtds.items():
-            print(str(key)+" : "+str(item))
-
         plt.figure()
-        sns.barplot(qtds, palette="Set2")
+        ax = sns.barplot(qtds, palette="Set2")
         plt.title("Algoritmo x Quantidade de comparações para entradas de tamanho "+str(tamanho))
-
+        for p in ax.patches:
+            valor = p.get_height()/1000000
+            ax.annotate(f'{valor:.1f}', (p.get_x() + p.get_width() / 2., valor),
+                ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+        plt.ylabel('Tempo em milissegundos')
         diretorio = "algoritmoXComparacoesPorTamanhoDaEntrada"
         arquivo = "AlgoritmoXComparacoesParaEntradasDeTamanho"+str(tamanho)
         salvar_grafico(diretorio, arquivo, plt)
@@ -79,11 +149,21 @@ def tempo_e_tamanho_da_entrada_por_algoritmo_por_ordenacao_da_entrada(df, algori
                 print(str(key)+" : "+str(item))
 
             plt.figure()
-            sns.barplot(tempos, palette="Set2")
+            ax = sns.barplot(tempos, palette="Set2")
             plt.title("Tamanho da entrada x Tempo de execução do "+str(algoritmo)+" ("+ordenacao+")")
+            for p in ax.patches:
+                valor = p.get_height()/1000000
+                ax.annotate(f'{valor:.1f}', (p.get_x() + p.get_width() / 2., valor),
+                    ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+            plt.ylabel('Tempo em milissegundos')
+            tipo = ""
+            if (ordenacao[0] == 'C'):
+                tipo = "c"
+            if (ordenacao[0] == 'D'):
+                tipo = "d"
 
             diretorio = "tamanhoDaEntradaXTempoDeExecucaoPorAlgoritmo"+str(ordenacao)
-            arquivo = "tamanhoDaEntradaXTempoDeExecucaoDo"+str(algoritmo)
+            arquivo = "tamanhoDaEntradaXTempoDeExecucaoDo"+str(algoritmo)+tipo
             salvar_grafico(diretorio, arquivo, plt)
 
 
@@ -94,3 +174,6 @@ ordenacoes = ["Aleatorio", "Crescente", "Decrescente"]
 tempo_e_algoritmo_por_tamanho_da_entrada(df, tamanhos)
 qtd_de_comparacoes_e_algoritmo_por_tamanho_de_entrada(df, tamanhos)
 tempo_e_tamanho_da_entrada_por_algoritmo_por_ordenacao_da_entrada(df, algoritmos, ordenacoes)
+tempo_nlogn(df, tamanhos)
+tempos_nlogn_ins(df, tamanhos)
+tempo_nlogn_decres(df, tamanhos)
