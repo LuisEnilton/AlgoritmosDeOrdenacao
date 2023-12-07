@@ -62,7 +62,6 @@ vector<int> lerDoArquivo(const string &nomeArquivo) {
 
 int main() {
     int choice;
-    //n é escolhido arbitrariamente
     cout << "Escolha o tamanho da entrada de vetor que deseja ordenar:" << endl;
     cout << "100, 1.000, 5.000, 30.000, 50.000, 100.000, 150.000, 200.000." << endl;
     int n = 200000;
