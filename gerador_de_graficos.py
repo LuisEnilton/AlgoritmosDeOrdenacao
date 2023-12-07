@@ -27,6 +27,11 @@ def tempo_e_algoritmo_por_tamanho_da_entrada(df, tamanhos):
             if linha["Ordenação da entrada"] == "Aleatorio":
                 tempos[linha["Algoritmo"]] = int(linha["Media dos tempos"])
 
+        print(tamanho)
+        for key, item in tempos.items():
+            print(str(key)+" : "+str(item))
+
+
         plt.figure()
         sns.barplot(tempos, palette="Set2")
         plt.title("Algoritmo x Tempo de execução para entradas de tamanho "+str(tamanho))
@@ -39,12 +44,15 @@ def tempo_e_algoritmo_por_tamanho_da_entrada(df, tamanhos):
 def qtd_de_comparacoes_e_algoritmo_por_tamanho_de_entrada(df, tamanhos):
     for tamanho in tamanhos:
         df_entrada = df.loc[df["Tamanho da entrada"] == tamanho]
-        print(df_entrada)
         qtds = {}
 
         for indice, linha in df_entrada.iterrows():
             if linha["Ordenação da entrada"] == "Aleatorio":
                 qtds[linha["Algoritmo"]] = int(linha["Media das comparações"])
+
+        print(tamanho)
+        for key, item in qtds.items():
+            print(str(key)+" : "+str(item))
 
         plt.figure()
         sns.barplot(qtds, palette="Set2")
@@ -64,7 +72,7 @@ def tempo_e_tamanho_da_entrada_por_algoritmo_por_ordenacao_da_entrada(df, algori
             # em picosegundos
             for indice, linha in df_entrada.iterrows():
                 if linha["Ordenação da entrada"] == ordenacao:
-                    tempos[int(linha["Tamanho da entrada"])] = float(linha["Media dos tempos"])/1000
+                    tempos[int(linha["Tamanho da entrada"])] = float(linha["Media dos tempos"])
 
             print(algoritmo+" : "+ordenacao)
             for key, item in tempos.items():
