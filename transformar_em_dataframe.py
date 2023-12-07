@@ -85,6 +85,10 @@ def gerar_df(nomes_diretorios):
     columns = ["Algoritmo", "Tamanho da entrada", "Ordenação da entrada", "Media dos tempos", "Media das comparações"]
     df = pd.DataFrame(data = matriz_resultante, columns = columns)
 
-    # print(df)
+    media_em_mili = []
+    for indice, linha in df.iterrows():
+            media_em_mili.append(linha["Media dos tempos"]/1000000) # 10**-9 para 10**-3
+    
+    df["Media dos tempos"] = media_em_mili
 
     return df
